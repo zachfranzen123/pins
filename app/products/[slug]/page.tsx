@@ -20,6 +20,19 @@ export default async function ProductPage({
   const soldOut = product.inventory <= 0;
   const isRoxie = slug === "roxie-carry-on";
   const accent = isRoxie ? "var(--pink)" : "var(--teal)";
+  const galleryItems = [
+    {
+      src: copy.images.frontArt,
+      alt: `${product.name} front profile artwork`,
+      fit: "contain",
+    },
+    {
+      src: copy.images.backArt,
+      alt: `${product.name} back profile artwork`,
+      fit: "contain",
+    },
+    ...copy.images.scenes.map((scene) => ({ ...scene, fit: "cover" })),
+  ];
 
   return (
     <main className="bg-[var(--cream)] text-[var(--ink)]">
@@ -32,13 +45,19 @@ export default async function ProductPage({
             >
               <Image src={copy.images.hero} alt={product.name} fill className="object-contain p-3" unoptimized priority />
             </div>
-            <div className={`mt-3 grid gap-2 ${copy.images.scenes.length === 4 ? "grid-cols-2" : "grid-cols-3"}`}>
-              {copy.images.scenes.map((scene) => (
+            <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+              {galleryItems.map((scene) => (
                 <div
                   key={scene.src}
                   className="relative aspect-square overflow-hidden rounded-xl border-2 border-[var(--ink)] bg-white"
                 >
-                  <Image src={scene.src} alt={scene.alt} fill className="object-cover" unoptimized />
+                  <Image
+                    src={scene.src}
+                    alt={scene.alt}
+                    fill
+                    className={scene.fit === "contain" ? "object-contain p-3" : "object-cover"}
+                    unoptimized
+                  />
                 </div>
               ))}
             </div>
