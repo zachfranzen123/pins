@@ -118,10 +118,9 @@ export default async function ProductPage({
 
                   <div className="text-center">
                     <div className={`relative mx-auto bg-[#c7c9c7] shadow-lg ${isRoxie ? "h-52 w-36 rounded-[22px]" : "h-64 w-28 rounded-full rounded-b-[18px]"}`}>
-                      <span className="absolute left-1/2 top-[31%] h-7 w-7 -translate-x-1/2 rounded-full bg-[#20242d]" />
-                      <span className="absolute bottom-[17%] left-1/2 h-7 w-7 -translate-x-1/2 rounded-full bg-[#20242d]" />
+                      <span className="absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#20242d]" />
                     </div>
-                    <p className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-black/45">Two-post back</p>
+                    <p className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-black/45">Clutch back</p>
                   </div>
                 </div>
               </div>

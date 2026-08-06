@@ -25,19 +25,19 @@ export const PRODUCT_COPY: Record<string, ProductCopy> = {
     ],
     production: {
       title: "From working sketch to finished pin",
-      intro: `The production proof translated the original silhouette into a 38 mm soft-enamel pin. The teal face was specified in PMS 325 C, surrounded by raised silver-tone metal, with two rubber clutch posts on the back so the long shape stays level when worn.`,
+      intro: `The production proof translated the original silhouette into a 38 mm soft-enamel pin. The teal face was specified in PMS 325 C, surrounded by raised silver-tone metal, with a rubber clutch post on the back.`,
       details: [
         { label: "Finished height", value: "38 mm / 1.5 inches" },
         { label: "Enamel", value: "PMS 325 C soft enamel" },
         { label: "Metal", value: "Raised silver-tone linework" },
-        { label: "Back", value: "Two rubber clutch posts" },
+        { label: "Back", value: "Rubber clutch post" },
       ],
     },
     specs: [
       { label: "Size", value: `1.5"` },
       { label: "Color", value: "Single-tone teal enamel (PMS 325C)" },
       { label: "Plating", value: "Silver-tone metal" },
-      { label: "Backing", value: "Two rubber clutch backs" },
+      { label: "Backing", value: "Rubber clutch back" },
       { label: "Style", value: "Soft enamel, die-struck" },
     ],
     images: {
@@ -62,19 +62,19 @@ export const PRODUCT_COPY: Record<string, ProductCopy> = {
     ],
     production: {
       title: "Designed like the real carry-on",
-      intro: `The production proof set Roxie at 38 × 22 mm and converted the handle opening into a true cutout rather than printed enamel. Black soft enamel forms the body, raised silver-tone metal defines the pocket and hardware details, and two rubber clutch posts keep the pin secure and upright.`,
+      intro: `The production proof set Roxie at 38 × 22 mm and converted the handle opening into a true cutout rather than printed enamel. Black soft enamel forms the body, raised silver-tone metal defines the pocket and hardware details, and a rubber clutch post keeps the pin secure.`,
       details: [
         { label: "Finished size", value: "38 × 22 mm / 1.5 inches tall" },
         { label: "Handle", value: "True open cutout—no enamel fill" },
         { label: "Enamel", value: "Black soft enamel" },
-        { label: "Back", value: "Two rubber clutch posts" },
+        { label: "Back", value: "Rubber clutch post" },
       ],
     },
     specs: [
       { label: "Size", value: `1.5" tall` },
       { label: "Color", value: "Black enamel with silver-tone linework" },
       { label: "Handle", value: "Open metal cutout" },
-      { label: "Backing", value: "Two rubber clutch backs" },
+      { label: "Backing", value: "Rubber clutch back" },
       { label: "Style", value: "Soft enamel, die-struck" },
     ],
     images: {
