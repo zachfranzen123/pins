@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import type { Product } from "@/lib/products";
 import type { Order, OrderItem } from "@/lib/orders";
 import type { Coupon } from "@/lib/coupons";
 import { formatMoney } from "@/lib/config";
+
+const STARTING_INVENTORY = 50;
 
 type Tab = "inventory" | "orders" | "coupons";
 
@@ -50,8 +53,7 @@ function InventoryPanel({ products }: { products: Product[] }) {
   );
   const [savingSlug, setSavingSlug] = useState<string | null>(null);
 
-  async function save(slug: string) {
-    const inventory = parseInt(values[slug], 10);
+  async function save(slug: string, inventory: number) {
     if (!Number.isFinite(inventory) || inventory < 0) return;
     setSavingSlug(slug);
     await fetch("/api/admin/inventory", {
@@ -80,11 +82,22 @@ function InventoryPanel({ products }: { products: Product[] }) {
               className="w-24 rounded-lg border border-black/20 px-3 py-2 text-center"
             />
             <button
-              onClick={() => save(p.slug)}
+              onClick={() => save(p.slug, parseInt(values[p.slug], 10))}
               disabled={savingSlug === p.slug}
               className="rounded-full bg-[#1f2430] text-white text-sm px-4 py-2 disabled:opacity-50"
             >
               {savingSlug === p.slug ? "Saving..." : "Save"}
+            </button>
+            <button
+              onClick={() => {
+                setValues((v) => ({ ...v, [p.slug]: String(STARTING_INVENTORY) }));
+                save(p.slug, STARTING_INVENTORY);
+              }}
+              disabled={savingSlug === p.slug}
+              className="rounded-full bg-black/5 text-black/60 text-sm px-4 py-2 disabled:opacity-50"
+              title={`Set inventory back to ${STARTING_INVENTORY}`}
+            >
+              Reset to {STARTING_INVENTORY}
             </button>
           </div>
         </div>
@@ -97,7 +110,12 @@ function OrdersPanel({ orders }: { orders: Order[] }) {
   const router = useRouter();
   const [busy, setBusy] = useState<string | null>(null);
 
+  const readyToShipCount = orders.filter((o) => o.status === "paid").length;
+
   async function act(orderNumber: string, action: "paid" | "shipped" | "cancel") {
+    if (action === "cancel" && !confirm(`Cancel order ${orderNumber}? This restores its stock.`)) {
+      return;
+    }
     setBusy(orderNumber + action);
     await fetch(`/api/admin/orders/${orderNumber}`, {
       method: "PATCH",
@@ -108,47 +126,74 @@ function OrdersPanel({ orders }: { orders: Order[] }) {
     router.refresh();
   }
 
-  if (orders.length === 0) return <p className="text-black/50">No orders yet.</p>;
-
   return (
-    <div className="space-y-4">
-      {orders.map((order) => {
-        const items: OrderItem[] = JSON.parse(order.items_json);
-        return (
-          <div key={order.order_number} className="rounded-xl border border-black/10 p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">{order.order_number}</p>
-                <p className="text-sm text-black/50">
-                  {order.customer_name} · {order.customer_email}
-                </p>
-              </div>
-              <span
-                className={`text-xs rounded-full px-3 py-1 capitalize ${
-                  order.status === "paid"
-                    ? "bg-green-100 text-green-800"
-                    : order.status === "pending"
-                    ? "bg-amber-100 text-amber-800"
-                    : order.status === "shipped"
-                    ? "bg-blue-100 text-blue-800"
-                    : "bg-black/10 text-black/60"
-                }`}
-              >
-                {order.status}
-              </span>
-            </div>
-            <ul className="text-sm mt-2 text-black/70">
-              {items.map((item) => (
-                <li key={item.slug}>
-                  {item.name} × {item.qty}
-                </li>
-              ))}
-            </ul>
-            <p className="text-sm mt-1 font-medium">{formatMoney(order.total_cents)} · {order.payment_method}</p>
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-sm text-black/50">
+          {orders.length} order{orders.length === 1 ? "" : "s"}
+        </p>
+        {readyToShipCount > 0 && (
+          <Link
+            href="/admin/labels"
+            className="text-sm rounded-full bg-[#1f2430] text-white px-4 py-2"
+          >
+            Print all labels ({readyToShipCount})
+          </Link>
+        )}
+      </div>
 
-            <div className="flex gap-2 mt-3">
-              {order.status === "pending" && (
-                <>
+      {orders.length === 0 && <p className="text-black/50">No orders yet.</p>}
+
+      <div className="space-y-4">
+        {orders.map((order) => {
+          const items: OrderItem[] = JSON.parse(order.items_json);
+          return (
+            <div key={order.order_number} className="rounded-xl border border-black/10 p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">{order.order_number}</p>
+                  <p className="text-sm text-black/50">
+                    {order.customer_name} · {order.customer_email}
+                  </p>
+                </div>
+                <span
+                  className={`text-xs rounded-full px-3 py-1 capitalize ${
+                    order.status === "paid"
+                      ? "bg-green-100 text-green-800"
+                      : order.status === "pending"
+                      ? "bg-amber-100 text-amber-800"
+                      : order.status === "shipped"
+                      ? "bg-blue-100 text-blue-800"
+                      : "bg-black/10 text-black/60"
+                  }`}
+                >
+                  {order.status}
+                </span>
+              </div>
+
+              <ul className="text-sm mt-2 text-black/70">
+                {items.map((item) => (
+                  <li key={item.slug}>
+                    {item.name} × {item.qty}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm mt-1 font-medium">
+                {formatMoney(order.total_cents)} · {order.payment_method}
+              </p>
+
+              <div className="text-sm text-black/60 mt-3 border-t border-black/10 pt-3">
+                <p className="text-black/40 text-xs uppercase tracking-wide mb-1">Ship to</p>
+                <p>{order.shipping_line1}</p>
+                {order.shipping_line2 && <p>{order.shipping_line2}</p>}
+                <p>
+                  {order.shipping_city}, {order.shipping_state} {order.shipping_zip}
+                </p>
+                <p>{order.shipping_country}</p>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mt-3">
+                {order.status === "pending" && (
                   <button
                     onClick={() => act(order.order_number, "paid")}
                     disabled={busy === order.order_number + "paid"}
@@ -156,28 +201,38 @@ function OrdersPanel({ orders }: { orders: Order[] }) {
                   >
                     Mark paid
                   </button>
+                )}
+                {order.status === "paid" && (
                   <button
-                    onClick={() => act(order.order_number, "cancel")}
-                    disabled={busy === order.order_number + "cancel"}
-                    className="text-sm rounded-full bg-red-700 text-white px-3 py-1.5 disabled:opacity-50"
+                    onClick={() => act(order.order_number, "shipped")}
+                    disabled={busy === order.order_number + "shipped"}
+                    className="text-sm rounded-full bg-blue-700 text-white px-3 py-1.5 disabled:opacity-50"
                   >
-                    Cancel
+                    Mark shipped
                   </button>
-                </>
-              )}
-              {order.status === "paid" && (
-                <button
-                  onClick={() => act(order.order_number, "shipped")}
-                  disabled={busy === order.order_number + "shipped"}
-                  className="text-sm rounded-full bg-blue-700 text-white px-3 py-1.5 disabled:opacity-50"
-                >
-                  Mark shipped
-                </button>
-              )}
+                )}
+                {(order.status === "pending" || order.status === "paid") && (
+                  <>
+                    <Link
+                      href={`/admin/labels/${order.order_number}`}
+                      className="text-sm rounded-full bg-black/5 text-black/70 px-3 py-1.5"
+                    >
+                      Print label
+                    </Link>
+                    <button
+                      onClick={() => act(order.order_number, "cancel")}
+                      disabled={busy === order.order_number + "cancel"}
+                      className="text-sm rounded-full bg-red-700 text-white px-3 py-1.5 disabled:opacity-50"
+                    >
+                      Cancel
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
