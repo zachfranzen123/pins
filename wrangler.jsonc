@@ -12,9 +12,7 @@
 		{
 			"binding": "DB",
 			"database_name": "pins-store-db",
-			// Replace with the ID printed by `npx wrangler d1 create pins-store-db`
-			// (or copy it from the Cloudflare dashboard: Storage & Databases > D1).
-			"database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+			"database_id": "b2320cf9-00cf-494e-8663-335ce73881e2"
 		}
 	]
 }
