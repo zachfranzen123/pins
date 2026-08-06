@@ -16,8 +16,6 @@ export default async function HomePage() {
   const products = await listProducts();
   const larry = PRODUCT_COPY["layover-larry"];
   const roxie = PRODUCT_COPY["roxie-carry-on"];
-  const larryProduct = products.find((product) => product.slug === "layover-larry");
-  const roxieProduct = products.find((product) => product.slug === "roxie-carry-on");
 
   return (
     <main className="overflow-hidden bg-[#f4f0e8] text-[#151719]">
