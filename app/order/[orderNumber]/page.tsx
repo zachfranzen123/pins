@@ -27,15 +27,15 @@ export default async function OrderPage({
   };
 
   return (
-    <div className="mx-auto max-w-2xl px-4 sm:px-6 py-12">
+    <div className="mx-auto max-w-xl px-4 sm:px-6 py-8">
       <p className="text-sm font-bold uppercase tracking-wide text-black/40">Order {order.order_number}</p>
-      <h1 className="font-display text-3xl font-semibold tracking-tight mt-1">
+      <h1 className="font-display text-2xl font-semibold tracking-tight mt-1">
         {order.status === "pending" ? "Thanks! One more step. 🎉" : statusLabel[order.status]}
       </h1>
 
       {order.status === "pending" && (
-        <div className="pop-shadow mt-6 rounded-2xl border-2 border-[var(--ink)] bg-[var(--yellow)] p-5">
-          <h2 className="font-display font-semibold text-lg mb-2">How to pay</h2>
+        <div className="pop-shadow mt-4 rounded-2xl border-2 border-[var(--ink)] bg-[var(--yellow)] p-4">
+          <h2 className="font-display font-semibold text-base mb-2">How to pay</h2>
           <p className="text-black/80">{linkify(instructions)}</p>
           <p className="text-sm text-black/60 mt-3">
             We&apos;ll email you as soon as we see the payment come through.
@@ -43,8 +43,8 @@ export default async function OrderPage({
         </div>
       )}
 
-      <div className="mt-6 rounded-2xl border-2 border-[var(--ink)] bg-white p-5">
-        <h2 className="font-display font-semibold text-lg mb-3">Order summary</h2>
+      <div className="mt-4 rounded-2xl border-2 border-[var(--ink)] bg-white p-4">
+        <h2 className="font-display font-semibold text-base mb-2">Order summary</h2>
         <ul className="space-y-1 text-sm">
           {items.map((item) => (
             <li key={item.slug} className="flex justify-between">
@@ -73,8 +73,8 @@ export default async function OrderPage({
         </div>
       </div>
 
-      <div className="mt-6 rounded-2xl border-2 border-[var(--ink)] bg-white p-5 text-sm">
-        <h2 className="font-display font-semibold text-lg mb-2">Shipping to</h2>
+      <div className="mt-4 rounded-2xl border-2 border-[var(--ink)] bg-white p-4 text-sm">
+        <h2 className="font-display font-semibold text-base mb-2">Shipping to</h2>
         <p className="text-black/70">
           {order.customer_name}
           <br />

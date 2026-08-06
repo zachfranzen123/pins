@@ -16,11 +16,11 @@ export default async function CheckoutPage({
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-4 sm:px-6 py-12">
-      <span className="pop-shadow inline-block -rotate-2 rounded-full border-2 border-[var(--ink)] bg-[var(--teal)] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em]">
+    <div className="mx-auto max-w-xl px-4 sm:px-6 py-8">
+      <span className="pop-shadow inline-block -rotate-2 rounded-full border-2 border-[var(--ink)] bg-[var(--teal)] px-3 py-1 text-xs font-bold uppercase tracking-[0.14em]">
         Almost there
       </span>
-      <h1 className="font-display text-3xl font-semibold tracking-tight mt-4 mb-8">Checkout</h1>
+      <h1 className="font-display text-2xl font-semibold tracking-tight mt-3 mb-6">Checkout</h1>
       <CheckoutForm products={products} initialQty={initialQty} />
     </div>
   );
