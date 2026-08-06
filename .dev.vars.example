@@ -1,0 +1,17 @@
+NEXTJS_ENV=development
+
+# --- Email (Resend) ---
+RESEND_API_KEY=re_your_resend_api_key
+FROM_EMAIL=orders@yourdomain.com
+
+# --- Admin panel ---
+# Password you type in at /admin/login
+ADMIN_PASSWORD=change-me
+# Random string used to sign the admin session cookie. Generate one with:
+#   openssl rand -hex 32
+ADMIN_SESSION_SECRET=change-me-too
+
+# --- Payment handles shown to buyers at checkout ---
+VENMO_HANDLE=@your-venmo-handle
+ZELLE_CONTACT=your-zelle-email-or-phone
+APPLE_CASH_CONTACT=your-apple-cash-phone-or-email
