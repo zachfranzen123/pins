@@ -3,7 +3,8 @@ import { getProduct } from "@/lib/products";
 import { checkCoupon, redeemCoupon } from "@/lib/coupons";
 import { createOrder, OutOfStockError } from "@/lib/orders";
 import { sendOrderReceivedEmail } from "@/lib/email";
-import { PAYMENT_METHODS } from "@/lib/config";
+import { formatMoney, PAYMENT_METHODS } from "@/lib/config";
+import { getEnv } from "@/lib/db";
 
 type CartLine = { slug: string; qty: number };
 
@@ -102,7 +103,20 @@ export async function POST(request: Request) {
     if (couponCode) await redeemCoupon(couponCode);
     await sendOrderReceivedEmail(order);
 
-    return NextResponse.json({ orderNumber: order.order_number });
+    let appleCashMessageUrl: string | undefined;
+    if (body.paymentMethod === "apple_cash") {
+      const env = await getEnv();
+      const contact = env.APPLE_CASH_CONTACT?.trim();
+      if (contact) {
+        const message = `Hi! I’d like to send ${formatMoney(order.total_cents)} via Apple Cash for Layover Pins order ${order.order_number}.`;
+        appleCashMessageUrl = `sms:${encodeURIComponent(contact)}&body=${encodeURIComponent(message)}`;
+      }
+    }
+
+    return NextResponse.json({
+      orderNumber: order.order_number,
+      appleCashMessageUrl,
+    });
   } catch (err) {
     if (err instanceof OutOfStockError) {
       return NextResponse.json({ error: `Sorry, we just sold out of ${err.slug}` }, { status: 409 });

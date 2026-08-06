@@ -2,6 +2,11 @@ export type ProductCopy = {
   slug: string;
   tagline: string;
   story: string[];
+  production: {
+    title: string;
+    intro: string;
+    details: { label: string; value: string }[];
+  };
   specs: { label: string; value: string }[];
   images: {
     hero: string;
@@ -18,12 +23,22 @@ export const PRODUCT_COPY: Record<string, ProductCopy> = {
       `Layover Larry is built the way the real thing is: a stout mallet head on a long ribbed handle you can actually get a grip on, cast in a single confident teal. He doesn't do subtle — he's the pin equivalent of the coworker who cracks a joke right when the delay board flips to "3+ hours."`,
       `Clip him to a lanyard, a jacket, or a headset bag and he's a quiet nod to everyone who's ever powered through a layover that ran long.`,
     ],
+    production: {
+      title: "From working sketch to finished pin",
+      intro: `The production proof translated the original silhouette into a 38 mm soft-enamel pin. The teal face was specified in PMS 325 C, surrounded by raised silver-tone metal, with two rubber clutch posts on the back so the long shape stays level when worn.`,
+      details: [
+        { label: "Finished height", value: "38 mm / 1.5 inches" },
+        { label: "Enamel", value: "PMS 325 C soft enamel" },
+        { label: "Metal", value: "Raised silver-tone linework" },
+        { label: "Back", value: "Two rubber clutch posts" },
+      ],
+    },
     specs: [
       { label: "Size", value: `1.5"` },
       { label: "Color", value: "Single-tone teal enamel (PMS 325C)" },
       { label: "Plating", value: "Silver-tone metal" },
-      { label: "Backing", value: "Rubber clutch back" },
-      { label: "Style", value: "Hard enamel, die-struck" },
+      { label: "Backing", value: "Two rubber clutch backs" },
+      { label: "Style", value: "Soft enamel, die-struck" },
     ],
     images: {
       hero: "/images/layover-larry-hero.jpg",
@@ -41,24 +56,32 @@ export const PRODUCT_COPY: Record<string, ProductCopy> = {
     slug: "roxie-carry-on",
     tagline: "Wheels up. Always.",
     story: [
-      `Roxie is the carry-on that's made every gate on time — scuffed corners, one sticky wheel, and a silhouette you'd know from across the terminal. She's the bag every road warrior and crew member has dragged through a thousand jet bridges.`,
-      `We drew her in a single confident black with clean silver linework, right down to the telescoping handle and the little zipper pull on the front pocket. No logos, no branding — just the shape everyone recognizes on sight.`,
-      `A small tribute to the bag that's never once let you check it.`,
+      `Roxie is based on the soft-sided rollaboard that crew members and frequent flyers actually carry: exterior pockets, a telescoping handle, side hardware, and the unmistakable upright silhouette seen on every jet bridge.`,
+      `The artwork was stripped of logos and branding so the shape could do all the talking. Black enamel fills the bag while raised silver-tone metal traces the seams, pockets, wheels, zipper pull, and handle. The space inside the telescoping handle is physically cut out, so the garment or bag beneath the pin shows through.`,
+      `It is a small tribute to the carry-on that is always packed, never volunteered at the gate, and somehow still rolling after a thousand trips.`,
     ],
+    production: {
+      title: "Designed like the real carry-on",
+      intro: `The production proof set Roxie at 38 × 22 mm and converted the handle opening into a true cutout rather than printed enamel. Black soft enamel forms the body, raised silver-tone metal defines the pocket and hardware details, and two rubber clutch posts keep the pin secure and upright.`,
+      details: [
+        { label: "Finished size", value: "38 × 22 mm / 1.5 inches tall" },
+        { label: "Handle", value: "True open cutout—no enamel fill" },
+        { label: "Enamel", value: "Black soft enamel" },
+        { label: "Back", value: "Two rubber clutch posts" },
+      ],
+    },
     specs: [
-      { label: "Size", value: `1.5"` },
+      { label: "Size", value: `1.5" tall` },
       { label: "Color", value: "Black enamel with silver-tone linework" },
-      { label: "Plating", value: "Silver-tone metal" },
-      { label: "Backing", value: "Rubber clutch back" },
-      { label: "Style", value: "Hard enamel, die-struck" },
+      { label: "Handle", value: "Open metal cutout" },
+      { label: "Backing", value: "Two rubber clutch backs" },
+      { label: "Style", value: "Soft enamel, die-struck" },
     ],
     images: {
       hero: "/images/roxie-carry-on-hero.jpg",
       scenes: [
-        { src: "/images/roxie-carry-on-ai-suitcase.jpg", alt: "Roxie the Carry-On pin on an actual rolling suitcase" },
         { src: "/images/roxie-carry-on-ai-passport.jpg", alt: "Roxie the Carry-On pin on a passport cover" },
-        { src: "/images/roxie-carry-on-ai-luggagetag.jpg", alt: "Roxie the Carry-On pin on a leather luggage tag" },
-        { src: "/images/roxie-carry-on-ai-inbox.jpg", alt: "Roxie the Carry-On pin in its gift packaging" },
+        { src: "/images/roxie-carry-on-ai-luggagetag.jpg", alt: "Roxie the Carry-On pin on a fabric luggage tag" },
         { src: "/images/roxie-carry-on-ai-quarter.jpg", alt: "Roxie the Carry-On pin next to a quarter for size reference" },
         { src: "/images/roxie-carry-on-ai-inhand.jpg", alt: "Roxie the Carry-On pin held in a hand for scale" },
       ],

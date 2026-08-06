@@ -62,13 +62,27 @@ export default function CheckoutForm({
           couponCode: couponCode || undefined,
         }),
       });
-      const data = (await res.json()) as { orderNumber?: string; error?: string };
+      const data = (await res.json()) as {
+        orderNumber?: string;
+        appleCashMessageUrl?: string;
+        error?: string;
+      };
       if (!res.ok || !data.orderNumber) {
         setError(data.error ?? "Something went wrong. Please try again.");
         setSubmitting(false);
         return;
       }
-      router.push(`/order/${data.orderNumber}`);
+
+      const confirmationUrl = `/order/${data.orderNumber}`;
+      router.push(confirmationUrl);
+
+      if (paymentMethod === "apple_cash" && data.appleCashMessageUrl) {
+        // Give Next.js a moment to save the confirmation page in browser history,
+        // then hand off to Messages with the recipient and order details prefilled.
+        window.setTimeout(() => {
+          window.location.href = data.appleCashMessageUrl!;
+        }, 250);
+      }
     } catch {
       setError("Something went wrong. Please try again.");
       setSubmitting(false);
@@ -199,7 +213,9 @@ export default function CheckoutForm({
           ))}
         </div>
         <p className="text-xs text-black/50 mt-2">
-          You&apos;ll get the exact handle/QR to send payment to on the confirmation page and in your email.
+          {paymentMethod === "apple_cash"
+            ? "After the order is created, Messages will open with the recipient, total, and order number already filled in. You’ll still confirm and send the Apple Cash payment yourself."
+            : "You’ll get the exact payment details on the confirmation page and in your email."}
         </p>
       </section>
 
@@ -229,7 +245,11 @@ export default function CheckoutForm({
           disabled={submitting}
           className="mt-6 w-full rounded-full bg-[#1f2430] text-white py-3 font-medium hover:bg-[#343b4a] disabled:opacity-50"
         >
-          {submitting ? "Placing order..." : "Place order"}
+          {submitting
+            ? "Placing order..."
+            : paymentMethod === "apple_cash"
+              ? "Place order & open Messages"
+              : "Place order"}
         </button>
       </section>
     </form>
