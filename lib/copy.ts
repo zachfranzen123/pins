@@ -19,7 +19,7 @@ export const PRODUCT_COPY: Record<string, ProductCopy> = {
       `Clip him to a lanyard, a jacket, or a headset bag and he's a quiet nod to everyone who's ever powered through a layover that ran long.`,
     ],
     specs: [
-      { label: "Size", value: `1.5" tall — true to the size guide, not inflated for the listing photo` },
+      { label: "Size", value: `1.5"` },
       { label: "Color", value: "Single-tone teal enamel (PMS 325C)" },
       { label: "Plating", value: "Silver-tone metal" },
       { label: "Backing", value: "Rubber clutch back" },
@@ -46,7 +46,7 @@ export const PRODUCT_COPY: Record<string, ProductCopy> = {
       `A small tribute to the bag that's never once let you check it.`,
     ],
     specs: [
-      { label: "Size", value: `1.5" tall — true to the size guide, not inflated for the listing photo` },
+      { label: "Size", value: `1.5"` },
       { label: "Color", value: "Black enamel with silver-tone linework" },
       { label: "Plating", value: "Silver-tone metal" },
       { label: "Backing", value: "Rubber clutch back" },

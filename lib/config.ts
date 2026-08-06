@@ -18,7 +18,7 @@ export function paymentInstructions(
   const amount = formatMoney(totalCents);
   switch (method) {
     case "venmo":
-      return `Send ${amount} via Venmo to ${env.VENMO_HANDLE}. Please include your order number in the payment note so we can match it up.`;
+      return `Pay ${amount} via Venmo: ${env.VENMO_HANDLE}. Please include your order number in the payment note so we can match it up.`;
     case "zelle":
       return `Send ${amount} via Zelle to ${env.ZELLE_CONTACT}. Please include your order number in the memo so we can match it up.`;
     case "apple_cash":

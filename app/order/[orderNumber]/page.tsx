@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getOrderByNumber, type OrderItem } from "@/lib/orders";
 import { getEnv } from "@/lib/db";
 import { formatMoney, paymentInstructions } from "@/lib/config";
+import { linkify } from "@/lib/linkify";
 
 export const dynamic = "force-dynamic";
 
@@ -35,7 +36,7 @@ export default async function OrderPage({
       {order.status === "pending" && (
         <div className="mt-6 rounded-xl border border-black/10 bg-white p-5">
           <h2 className="font-medium mb-2">How to pay</h2>
-          <p className="text-black/80">{instructions}</p>
+          <p className="text-black/80">{linkify(instructions)}</p>
           <p className="text-sm text-black/50 mt-3">
             We&apos;ll email you as soon as we see the payment come through.
           </p>
