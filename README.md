@@ -1,4 +1,4 @@
-# Layover Pins
+# Zach's Creations
 
 A small storefront for two enamel pins — **Layover Larry** (the ice mallet) and
 **Roxie the Carry-On** (the rolling suitcase) — built on Next.js and deployed

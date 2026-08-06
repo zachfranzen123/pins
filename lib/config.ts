@@ -1,4 +1,4 @@
-export const STORE_NAME = "Layover Pins";
+export const STORE_NAME = "Zach's Creations";
 
 export function formatMoney(cents: number): string {
   return `$${(cents / 100).toFixed(2)}`;
