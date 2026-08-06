@@ -11,6 +11,9 @@ export type ProductCopy = {
   images: {
     hero: string;
     scenes: { src: string; alt: string }[];
+    /** Actual manufacturer spec-sheet artwork, front and back, no branding. */
+    frontArt: string;
+    backArt: string;
   };
 };
 
@@ -42,6 +45,8 @@ export const PRODUCT_COPY: Record<string, ProductCopy> = {
     ],
     images: {
       hero: "/images/layover-larry-hero.jpg",
+      frontArt: "/images/layover-larry-front-art.png",
+      backArt: "/images/layover-larry-back-art.png",
       scenes: [
         { src: "/images/layover-larry-ai-denim.jpg", alt: "Layover Larry pin on a denim jacket" },
         { src: "/images/layover-larry-ai-beanie.jpg", alt: "Layover Larry pin on a knit beanie" },
@@ -79,6 +84,8 @@ export const PRODUCT_COPY: Record<string, ProductCopy> = {
     ],
     images: {
       hero: "/images/roxie-carry-on-hero.jpg",
+      frontArt: "/images/roxie-carry-on-front-art.png",
+      backArt: "/images/roxie-carry-on-back-art.png",
       scenes: [
         { src: "/images/roxie-carry-on-ai-passport.jpg", alt: "Roxie the Carry-On pin on a passport cover" },
         { src: "/images/roxie-carry-on-ai-luggagetag.jpg", alt: "Roxie the Carry-On pin on a fabric luggage tag" },

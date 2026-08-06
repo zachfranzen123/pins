@@ -122,28 +122,29 @@ export default async function ProductPage({
               <div className="relative flex h-full min-h-[350px] items-center justify-center">
                 <div className="relative flex items-end gap-10 sm:gap-16">
                   <div className="text-center">
-                    <div className="relative mx-auto h-64 w-40">
-                      {isRoxie ? (
-                        <div className="pop-shadow absolute inset-x-2 bottom-0 h-52 rounded-[24px] border-4 border-[var(--ink)] bg-[#111]">
-                          <div className="absolute left-5 right-5 top-12 h-px bg-white/30" />
-                          <div className="absolute bottom-5 left-5 right-5 h-24 rounded-[14px] border-2 border-white/30" />
-                          <div className="absolute -top-14 left-1/2 h-16 w-16 -translate-x-1/2 rounded-t-[18px] border-4 border-b-0 border-[var(--ink)] bg-transparent" />
-                          <div className="absolute right-3 top-8 h-24 w-3 rounded-full border border-white/30" />
-                        </div>
-                      ) : (
-                        <div className="pop-shadow absolute inset-x-6 bottom-0 h-64 rounded-full rounded-b-[20px] border-4 border-[var(--ink)] bg-[var(--teal)] before:absolute before:left-1/2 before:top-20 before:h-36 before:w-16 before:-translate-x-1/2 before:rounded-b-xl before:border-x-4 before:border-b-4 before:border-[var(--ink)] before:bg-[var(--teal)]" />
-                      )}
+                    <div className="pop-shadow relative mx-auto flex h-64 w-40 items-end justify-center rounded-[24px] border-4 border-[var(--ink)] bg-white p-4">
+                      <Image
+                        src={copy.images.frontArt}
+                        alt={`${product.name} actual front artwork from the manufacturer spec sheet`}
+                        width={300}
+                        height={740}
+                        unoptimized
+                        className="h-full w-auto object-contain"
+                      />
                     </div>
                     <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink)]/45">Front artwork</p>
                   </div>
 
                   <div className="text-center">
-                    <div
-                      className={`pop-shadow relative mx-auto border-4 border-[var(--ink)] bg-white ${
-                        isRoxie ? "h-52 w-36 rounded-[22px]" : "h-64 w-28 rounded-full rounded-b-[18px]"
-                      }`}
-                    >
-                      <span className="absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--ink)]" />
+                    <div className="pop-shadow relative mx-auto flex h-64 w-40 items-end justify-center rounded-[24px] border-4 border-[var(--ink)] bg-white p-4">
+                      <Image
+                        src={copy.images.backArt}
+                        alt={`${product.name} actual back artwork from the manufacturer spec sheet`}
+                        width={300}
+                        height={740}
+                        unoptimized
+                        className="h-full w-auto object-contain"
+                      />
                     </div>
                     <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-[var(--ink)]/45">Clutch back</p>
                   </div>
