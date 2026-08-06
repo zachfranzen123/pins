@@ -28,9 +28,12 @@ export const PRODUCT_COPY: Record<string, ProductCopy> = {
     images: {
       hero: "/images/layover-larry-hero.jpg",
       scenes: [
-        { src: "/images/layover-larry-jacket.jpg", alt: "Layover Larry pin on a denim jacket lapel, shown at true 1.5\" scale" },
-        { src: "/images/layover-larry-tote.jpg", alt: "Layover Larry pin on a canvas tote bag, shown at true 1.5\" scale" },
-        { src: "/images/layover-larry-cap.jpg", alt: "Layover Larry pin on a cap front panel, shown at true 1.5\" scale" },
+        { src: "/images/layover-larry-ai-denim.jpg", alt: "Layover Larry pin on a denim jacket" },
+        { src: "/images/layover-larry-ai-beanie.jpg", alt: "Layover Larry pin on a knit beanie" },
+        { src: "/images/layover-larry-ai-tote.jpg", alt: "Layover Larry pin on a canvas tote bag" },
+        { src: "/images/layover-larry-ai-backpack.jpg", alt: "Layover Larry pin on a backpack pocket" },
+        { src: "/images/layover-larry-ai-quarter.jpg", alt: "Layover Larry pin next to a quarter for size reference" },
+        { src: "/images/layover-larry-ai-inhand.jpg", alt: "Layover Larry pin held in a hand for scale" },
       ],
     },
   },
@@ -52,9 +55,12 @@ export const PRODUCT_COPY: Record<string, ProductCopy> = {
     images: {
       hero: "/images/roxie-carry-on-hero.jpg",
       scenes: [
-        { src: "/images/roxie-carry-on-jacket.jpg", alt: "Roxie the Carry-On pin on a denim jacket lapel, shown at true 1.5\" scale" },
-        { src: "/images/roxie-carry-on-tote.jpg", alt: "Roxie the Carry-On pin on a canvas tote bag, shown at true 1.5\" scale" },
-        { src: "/images/roxie-carry-on-cap.jpg", alt: "Roxie the Carry-On pin on a cap front panel, shown at true 1.5\" scale" },
+        { src: "/images/roxie-carry-on-ai-suitcase.jpg", alt: "Roxie the Carry-On pin on an actual rolling suitcase" },
+        { src: "/images/roxie-carry-on-ai-passport.jpg", alt: "Roxie the Carry-On pin on a passport cover" },
+        { src: "/images/roxie-carry-on-ai-luggagetag.jpg", alt: "Roxie the Carry-On pin on a leather luggage tag" },
+        { src: "/images/roxie-carry-on-ai-inbox.jpg", alt: "Roxie the Carry-On pin in its gift packaging" },
+        { src: "/images/roxie-carry-on-ai-quarter.jpg", alt: "Roxie the Carry-On pin next to a quarter for size reference" },
+        { src: "/images/roxie-carry-on-ai-inhand.jpg", alt: "Roxie the Carry-On pin held in a hand for scale" },
       ],
     },
   },
