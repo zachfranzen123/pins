@@ -92,17 +92,17 @@ export default function CheckoutForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-10">
       <section>
-        <h2 className="font-medium mb-3">Pins</h2>
+        <h2 className="font-display font-semibold text-lg mb-3">Pins</h2>
         <div className="space-y-3">
           {products.map((product) => {
             const soldOut = product.inventory <= 0;
             return (
               <div
                 key={product.slug}
-                className="flex items-center justify-between rounded-xl border border-black/10 p-4"
+                className="flex items-center justify-between rounded-2xl border-2 border-[var(--ink)] bg-white p-4"
               >
                 <div>
-                  <p className="font-medium">{product.name}</p>
+                  <p className="font-bold">{product.name}</p>
                   <p className="text-sm text-black/50">
                     {formatMoney(product.price_cents)} · {soldOut ? "Sold out" : `${product.inventory} in stock`}
                   </p>
@@ -114,7 +114,7 @@ export default function CheckoutForm({
                   disabled={soldOut}
                   value={qty[product.slug] ?? 0}
                   onChange={(e) => setQtyFor(product.slug, parseInt(e.target.value, 10) || 0, product.inventory)}
-                  className="w-20 rounded-lg border border-black/20 px-3 py-2 text-center disabled:opacity-40"
+                  className="w-20 rounded-lg border-2 border-[var(--ink)]/20 px-3 py-2 text-center font-semibold disabled:opacity-40"
                 />
               </div>
             );
@@ -123,12 +123,12 @@ export default function CheckoutForm({
       </section>
 
       <section>
-        <h2 className="font-medium mb-3">Contact</h2>
+        <h2 className="font-display font-semibold text-lg mb-3">Contact</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           <input
             required
             placeholder="Full name"
-            className="rounded-lg border border-black/20 px-3 py-2 sm:col-span-2"
+            className="rounded-lg border-2 border-[var(--ink)]/20 px-3 py-2 sm:col-span-2 focus:border-[var(--ink)] outline-none"
             value={fields.customerName}
             onChange={(e) => setFields((f) => ({ ...f, customerName: e.target.value }))}
           />
@@ -136,7 +136,7 @@ export default function CheckoutForm({
             required
             type="email"
             placeholder="Email"
-            className="rounded-lg border border-black/20 px-3 py-2 sm:col-span-2"
+            className="rounded-lg border-2 border-[var(--ink)]/20 px-3 py-2 sm:col-span-2 focus:border-[var(--ink)] outline-none"
             value={fields.customerEmail}
             onChange={(e) => setFields((f) => ({ ...f, customerEmail: e.target.value }))}
           />
@@ -144,46 +144,46 @@ export default function CheckoutForm({
       </section>
 
       <section>
-        <h2 className="font-medium mb-3">Shipping address</h2>
+        <h2 className="font-display font-semibold text-lg mb-3">Shipping address</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           <input
             required
             placeholder="Address line 1"
-            className="rounded-lg border border-black/20 px-3 py-2 sm:col-span-2"
+            className="rounded-lg border-2 border-[var(--ink)]/20 px-3 py-2 sm:col-span-2 focus:border-[var(--ink)] outline-none"
             value={fields.shippingLine1}
             onChange={(e) => setFields((f) => ({ ...f, shippingLine1: e.target.value }))}
           />
           <input
             placeholder="Address line 2 (optional)"
-            className="rounded-lg border border-black/20 px-3 py-2 sm:col-span-2"
+            className="rounded-lg border-2 border-[var(--ink)]/20 px-3 py-2 sm:col-span-2 focus:border-[var(--ink)] outline-none"
             value={fields.shippingLine2}
             onChange={(e) => setFields((f) => ({ ...f, shippingLine2: e.target.value }))}
           />
           <input
             required
             placeholder="City"
-            className="rounded-lg border border-black/20 px-3 py-2"
+            className="rounded-lg border-2 border-[var(--ink)]/20 px-3 py-2 focus:border-[var(--ink)] outline-none"
             value={fields.shippingCity}
             onChange={(e) => setFields((f) => ({ ...f, shippingCity: e.target.value }))}
           />
           <input
             required
             placeholder="State"
-            className="rounded-lg border border-black/20 px-3 py-2"
+            className="rounded-lg border-2 border-[var(--ink)]/20 px-3 py-2 focus:border-[var(--ink)] outline-none"
             value={fields.shippingState}
             onChange={(e) => setFields((f) => ({ ...f, shippingState: e.target.value }))}
           />
           <input
             required
             placeholder="ZIP"
-            className="rounded-lg border border-black/20 px-3 py-2"
+            className="rounded-lg border-2 border-[var(--ink)]/20 px-3 py-2 focus:border-[var(--ink)] outline-none"
             value={fields.shippingZip}
             onChange={(e) => setFields((f) => ({ ...f, shippingZip: e.target.value }))}
           />
           <input
             required
             placeholder="Country"
-            className="rounded-lg border border-black/20 px-3 py-2"
+            className="rounded-lg border-2 border-[var(--ink)]/20 px-3 py-2 focus:border-[var(--ink)] outline-none"
             value={fields.shippingCountry}
             onChange={(e) => setFields((f) => ({ ...f, shippingCountry: e.target.value }))}
           />
@@ -191,13 +191,13 @@ export default function CheckoutForm({
       </section>
 
       <section>
-        <h2 className="font-medium mb-3">Payment method</h2>
+        <h2 className="font-display font-semibold text-lg mb-3">Payment method</h2>
         <div className="flex gap-3 flex-wrap">
           {PAYMENT_METHODS.map((m) => (
             <label
               key={m.id}
-              className={`rounded-full border px-4 py-2 cursor-pointer text-sm ${
-                paymentMethod === m.id ? "border-[#1f2430] bg-[#1f2430] text-white" : "border-black/20"
+              className={`rounded-full border-2 border-[var(--ink)] px-4 py-2 cursor-pointer text-sm font-bold transition-colors ${
+                paymentMethod === m.id ? "pop-shadow bg-[var(--yellow)]" : "bg-white"
               }`}
             >
               <input
@@ -220,17 +220,17 @@ export default function CheckoutForm({
       </section>
 
       <section>
-        <h2 className="font-medium mb-3">Coupon code</h2>
+        <h2 className="font-display font-semibold text-lg mb-3">Coupon code</h2>
         <input
           placeholder="Optional"
-          className="rounded-lg border border-black/20 px-3 py-2 w-full sm:w-64"
+          className="rounded-lg border-2 border-[var(--ink)]/20 px-3 py-2 w-full sm:w-64 focus:border-[var(--ink)] outline-none"
           value={couponCode}
           onChange={(e) => setCouponCode(e.target.value)}
         />
       </section>
 
-      <section className="border-t border-black/10 pt-6">
-        <div className="flex items-center justify-between text-lg font-medium">
+      <section className="border-t-2 border-dashed border-[var(--ink)]/20 pt-6">
+        <div className="flex items-center justify-between text-lg font-bold">
           <span>Subtotal</span>
           <span>{formatMoney(subtotalCents)}</span>
         </div>
@@ -238,12 +238,12 @@ export default function CheckoutForm({
           Final total (after any coupon) is shown on the confirmation page.
         </p>
 
-        {error && <p className="text-red-600 text-sm mt-4">{error}</p>}
+        {error && <p className="text-red-600 text-sm mt-4 font-semibold">{error}</p>}
 
         <button
           type="submit"
           disabled={submitting}
-          className="mt-6 w-full rounded-full bg-[#1f2430] text-white py-3 font-medium hover:bg-[#343b4a] disabled:opacity-50"
+          className="pop-shadow mt-6 w-full rounded-full border-2 border-[var(--ink)] bg-[var(--ink)] text-white py-3.5 font-bold text-base disabled:opacity-50"
         >
           {submitting
             ? "Placing order..."
