@@ -44,7 +44,7 @@ export default async function HomePage() {
                 Shop the restock
               </a>
               <span className="text-xs font-bold uppercase tracking-wide text-[var(--ink)]/60">
-                $15 each · won&apos;t last long
+                $10 each · won&apos;t last long
               </span>
             </div>
           </div>

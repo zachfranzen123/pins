@@ -23,7 +23,7 @@ const fredoka = Fredoka({
 export const metadata: Metadata = {
   title: `${STORE_NAME} — Enamel Pins for Frequent Flyers`,
   description:
-    "Back by popular demand: a limited second run of Layover Larry and Roxie the Carry-On enamel pins. $15 each, while supplies last.",
+    "Back by popular demand: a limited second run of Layover Larry and Roxie the Carry-On enamel pins. $10 each, while supplies last.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

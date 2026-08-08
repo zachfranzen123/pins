@@ -30,7 +30,7 @@ out and status updates.
 - `lib/` — D1 queries (`products.ts`, `orders.ts`, `coupons.ts`), email
   (`email.ts`), admin session signing (`admin-auth.ts`), and
   `config.ts`/`copy.ts` for store text and payment-instruction copy
-- `schema.sql` — D1 schema + seed (both pins start at 50 in stock, $15)
+- `schema.sql` — D1 schema + seed (both pins start at 50 in stock, $10)
 - `public/images/` — product photography stand-ins: a hero shot plus three
   scale-accurate mockups (denim jacket, tote bag, cap) per pin, generated
   from the manufacturer's 1.5" spec-sheet artwork so proportions are correct.

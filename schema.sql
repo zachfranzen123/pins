@@ -45,5 +45,5 @@ CREATE TABLE IF NOT EXISTS coupons (
 );
 
 INSERT OR IGNORE INTO products (slug, name, price_cents, inventory) VALUES
-  ('layover-larry', 'Layover Larry', 1500, 50),
-  ('roxie-carry-on', 'Roxie the Carry-On', 1500, 50);
+  ('layover-larry', 'Layover Larry', 1000, 50),
+  ('roxie-carry-on', 'Roxie the Carry-On', 1000, 50);
