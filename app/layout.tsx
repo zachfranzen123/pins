@@ -20,10 +20,28 @@ const fredoka = Fredoka({
   weight: ["500", "600", "700"],
 });
 
+const TITLE = `${STORE_NAME} — Enamel Pins for Frequent Flyers`;
+const DESCRIPTION =
+  "Back by popular demand: a limited second run of Layover Larry and Roxie the Carry-On enamel pins. $10 each, while supplies last.";
+
 export const metadata: Metadata = {
-  title: `${STORE_NAME} — Enamel Pins for Frequent Flyers`,
-  description:
-    "Back by popular demand: a limited second run of Layover Larry and Roxie the Carry-On enamel pins. $10 each, while supplies last.",
+  metadataBase: new URL("https://pins.hizach.com"),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/",
+    siteName: STORE_NAME,
+    images: [{ url: "/images/og-share-card.jpg", width: 1200, height: 630, alt: TITLE }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/images/og-share-card.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
