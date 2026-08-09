@@ -33,3 +33,21 @@ export const PAYMENT_METHODS = [
   { id: "zelle", label: "Zelle" },
   { id: "apple_cash", label: "Apple Cash" },
 ] as const;
+
+/**
+ * Shipping is paused while the shop owner is away. Orders placed within this
+ * window (inclusive, by calendar date) get a heads-up in their emails; orders
+ * placed after `end` are unaffected — nothing to update when the trip is over.
+ */
+const VACATION_WINDOW = { start: "2026-08-10", end: "2026-08-20" } as const;
+const VACATION_NOTICE =
+  "Quick heads up: I'm away August 10–20, so shipping will be a little slower than usual for orders placed during that window. I'll get everything out as soon as I'm back — thanks for your patience!";
+
+/** `dateStr` is a D1 timestamp like "2026-08-10 17:54:31" or an ISO date. */
+export function vacationNoticeFor(dateStr: string): string | null {
+  const date = dateStr.slice(0, 10);
+  if (date >= VACATION_WINDOW.start && date <= VACATION_WINDOW.end) {
+    return VACATION_NOTICE;
+  }
+  return null;
+}

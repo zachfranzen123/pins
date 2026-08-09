@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import type { Order, OrderItem } from "./orders";
 import { getEnv } from "./db";
-import { STORE_NAME, formatMoney, paymentInstructions } from "./config";
+import { STORE_NAME, formatMoney, paymentInstructions, vacationNoticeFor } from "./config";
 
 function itemsList(order: Order): string {
   const items: OrderItem[] = JSON.parse(order.items_json);
@@ -40,6 +40,7 @@ async function send(to: string, subject: string, text: string) {
 export async function sendOrderReceivedEmail(order: Order) {
   const env = await getEnv();
   const instructions = paymentInstructions(env, order.payment_method, order.total_cents);
+  const vacationNotice = vacationNoticeFor(order.created_at);
   const text = `Hi ${order.customer_name},
 
 Thanks for your order from ${STORE_NAME}! Here's what we've got:
@@ -60,7 +61,7 @@ ${shippingBlock(order)}
 ${instructions}
 
 Once we see your payment come through we'll send a confirmation email and get your pin(s) in the mail. Questions? Just reply to this email.
-
+${vacationNotice ? `\n${vacationNotice}\n` : ""}
 Thanks!
 ${STORE_NAME}`;
 
@@ -105,6 +106,7 @@ ${STORE_NAME}`;
 }
 
 export async function sendPaymentConfirmedEmail(order: Order) {
+  const vacationNotice = vacationNoticeFor(order.created_at);
   const text = `Hi ${order.customer_name},
 
 Payment received for order ${order.order_number} — thank you! Your pin(s) will ship soon to:
@@ -113,7 +115,7 @@ ${shippingBlock(order)}
 
 ${itemsList(order)}
 Total paid: ${formatMoney(order.total_cents)}
-
+${vacationNotice ? `\n${vacationNotice}\n` : ""}
 Thanks for supporting ${STORE_NAME}!`;
 
   await send(order.customer_email, `Payment confirmed — ${order.order_number}`, text);
