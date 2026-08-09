@@ -67,6 +67,25 @@ ${STORE_NAME}`;
   await send(order.customer_email, `Order received — ${order.order_number}`, text);
 }
 
+export async function sendNewOrderNotification(order: Order) {
+  const env = await getEnv();
+  const to = env.ADMIN_NOTIFICATION_EMAIL || env.FROM_EMAIL;
+  const text = `New order ${order.order_number} — ${formatMoney(order.total_cents)} via ${order.payment_method}
+
+${order.customer_name} <${order.customer_email}>
+
+${itemsList(order)}
+
+Total: ${formatMoney(order.total_cents)}
+
+Ship to:
+${shippingBlock(order)}
+
+Once you see the payment land, mark it paid in /admin so the buyer gets their confirmation email.`;
+
+  await send(to, `New order — ${order.order_number} (${formatMoney(order.total_cents)})`, text);
+}
+
 export async function sendPaymentConfirmedEmail(order: Order) {
   const text = `Hi ${order.customer_name},
 

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getProduct } from "@/lib/products";
 import { checkCoupon, redeemCoupon } from "@/lib/coupons";
 import { createOrder, OutOfStockError } from "@/lib/orders";
-import { sendOrderReceivedEmail } from "@/lib/email";
+import { sendOrderReceivedEmail, sendNewOrderNotification } from "@/lib/email";
 import { formatMoney, PAYMENT_METHODS, STORE_NAME } from "@/lib/config";
 import { getEnv } from "@/lib/db";
 
@@ -102,6 +102,7 @@ export async function POST(request: Request) {
 
     if (couponCode) await redeemCoupon(couponCode);
     await sendOrderReceivedEmail(order);
+    await sendNewOrderNotification(order);
 
     let appleCashMessageUrl: string | undefined;
     if (body.paymentMethod === "apple_cash") {

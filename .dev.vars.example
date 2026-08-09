@@ -3,6 +3,8 @@ NEXTJS_ENV=development
 # --- Email (Resend) ---
 RESEND_API_KEY=re_your_resend_api_key
 FROM_EMAIL=orders@yourdomain.com
+# Optional: where new-order alerts go. Falls back to FROM_EMAIL if unset.
+ADMIN_NOTIFICATION_EMAIL=you@yourdomain.com
 
 # --- Admin panel ---
 # Password you type in at /admin/login

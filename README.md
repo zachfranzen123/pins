@@ -62,6 +62,7 @@ the committed template.
 | --- | --- |
 | `RESEND_API_KEY` | Your existing Resend API key |
 | `FROM_EMAIL` | Verified sender, e.g. `zach@hizach.com` |
+| `ADMIN_NOTIFICATION_EMAIL` | Optional — where new-order alerts go. Falls back to `FROM_EMAIL` if unset |
 | `ADMIN_PASSWORD` | Password for `/admin` |
 | `ADMIN_SESSION_SECRET` | Random string signing the admin session cookie — generate with `openssl rand -hex 32` |
 | `VENMO_HANDLE` | Shown to buyers who choose Venmo |
@@ -85,6 +86,7 @@ the committed template.
    ```bash
    npx wrangler secret put RESEND_API_KEY
    npx wrangler secret put FROM_EMAIL
+   npx wrangler secret put ADMIN_NOTIFICATION_EMAIL   # optional, defaults to FROM_EMAIL
    npx wrangler secret put ADMIN_PASSWORD
    npx wrangler secret put ADMIN_SESSION_SECRET
    npx wrangler secret put VENMO_HANDLE
@@ -109,6 +111,13 @@ the committed template.
   confirm the payment actually landed in Venmo/Zelle/Apple Cash, then click
   **Mark paid** — this sends the payment-confirmation email and unlocks
   **Mark shipped**. **Cancel** on a pending order restores its stock.
+- **Emails sent automatically**:
+  - When an order is placed: the buyer gets "Order received" (with payment
+    instructions), and you get "New order" at `ADMIN_NOTIFICATION_EMAIL` (or
+    `FROM_EMAIL` if that's not set) — this is your cue to go check Venmo/Zelle/
+    Apple Cash for the payment.
+  - When you click **Mark paid**: the buyer gets "Payment confirmed".
+  - **Mark shipped** does not currently send an email.
 - **Coupons**: `/admin` → Coupons tab. Create a percent-off or fixed-amount
   code, optionally cap total uses. Deactivate anytime; codes aren't deleted
   so usage history is kept.

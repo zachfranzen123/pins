@@ -9,6 +9,8 @@ declare global {
 
     RESEND_API_KEY: string;
     FROM_EMAIL: string;
+    /** Where new-order alerts go. Optional — falls back to FROM_EMAIL if unset. */
+    ADMIN_NOTIFICATION_EMAIL?: string;
 
     ADMIN_PASSWORD: string;
     ADMIN_SESSION_SECRET: string;
