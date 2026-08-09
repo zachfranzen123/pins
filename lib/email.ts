@@ -86,6 +86,24 @@ Once you see the payment land, mark it paid in /admin so the buyer gets their co
   await send(to, `New order — ${order.order_number} (${formatMoney(order.total_cents)})`, text);
 }
 
+export async function sendShippedEmail(order: Order) {
+  const text = `Hi ${order.customer_name},
+
+Wheels up! ✈️ Your ${STORE_NAME} order ${order.order_number} just left the building and is headed your way:
+
+${itemsList(order)}
+
+Landing at:
+${shippingBlock(order)}
+
+No tracking number on this flight — we're small batch and keep it simple — but it should touch down soon. Pin it somewhere it'll get noticed.
+
+Thanks for flying with us!
+${STORE_NAME}`;
+
+  await send(order.customer_email, `Shipped — ${order.order_number} is on its way ✈️`, text);
+}
+
 export async function sendPaymentConfirmedEmail(order: Order) {
   const text = `Hi ${order.customer_name},
 

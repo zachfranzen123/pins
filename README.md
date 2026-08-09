@@ -117,7 +117,7 @@ the committed template.
     `FROM_EMAIL` if that's not set) — this is your cue to go check Venmo/Zelle/
     Apple Cash for the payment.
   - When you click **Mark paid**: the buyer gets "Payment confirmed".
-  - **Mark shipped** does not currently send an email.
+  - When you click **Mark shipped**: the buyer gets a fun "Shipped — on its way ✈️" email. No tracking number (we don't collect one), just a heads up it's en route.
 - **Coupons**: `/admin` → Coupons tab. Create a percent-off or fixed-amount
   code, optionally cap total uses. Deactivate anytime; codes aren't deleted
   so usage history is kept.

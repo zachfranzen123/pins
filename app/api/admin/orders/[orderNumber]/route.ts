@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAdminAuthed } from "@/lib/require-admin";
 import { cancelOrder, markOrderPaid, markOrderShipped } from "@/lib/orders";
-import { sendPaymentConfirmedEmail } from "@/lib/email";
+import { sendPaymentConfirmedEmail, sendShippedEmail } from "@/lib/email";
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ orderNumber: string }> }) {
   if (!(await isAdminAuthed())) {
@@ -19,6 +19,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ or
       break;
     case "shipped":
       order = await markOrderShipped(orderNumber);
+      if (order) await sendShippedEmail(order);
       break;
     case "cancel":
       order = await cancelOrder(orderNumber);
